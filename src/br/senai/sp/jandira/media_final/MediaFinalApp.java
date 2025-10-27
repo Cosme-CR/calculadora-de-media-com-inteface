@@ -109,7 +109,7 @@ public class MediaFinalApp extends Application {
         stage.show();
 
         //eventos de click dos botao
-        //buttonCalculaMedia.addEventHandler();
+        buttonCalculaMedia.SetOnAction();
 
     }
 }
