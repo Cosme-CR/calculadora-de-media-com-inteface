@@ -11,14 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import javax.swing.border.Border;
+import java.awt.event.ActionEvent;
 
 public class MediaFinalApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-
-
 
 
     }
@@ -109,7 +107,66 @@ public class MediaFinalApp extends Application {
         stage.show();
 
         //eventos de click dos botao
-        buttonCalculaMedia.SetOnAction();
+
+
+        // -> funcao lambda funcao seta
+        buttonCalculaMedia.setOnAction( click->{
+            System.out.println("botao clicado");
+
+            String nomeDigitado = textFieldNome.getText();
+            labelAluno.setText("Nome do aluno: "+nomeDigitado);
+
+            //calcular media
+            //obter nota
+            double[] notas  = new double[4];
+
+            // cria variavel nota e ela recebe o conversor pra double e ele recebe a string
+            notas[0] = Double.parseDouble(textFielNota1.getText()); //transforma s string em um double
+
+            // recebe uma string
+            String nota2str = textFielNota2.getText();
+            //converte em double
+            notas[1] = Double.parseDouble(nota2str);
+
+            notas[2] = Double.parseDouble(textFielNota3.getText());
+            notas[3] = Double.parseDouble(textFielNota4.getText());
+
+            //loop while
+            int aux =0;
+            double mediaFinal=0;
+
+
+
+            while (aux < notas.length){
+
+                mediaFinal = mediaFinal+notas[aux];
+                if (aux <notas.length){
+                    mediaFinal = mediaFinal/notas.length;
+                }
+                aux ++;
+            }
+
+
+
+
+
+
+
+
+            String mediafinalstr = String.format("%.2f", mediaFinal);
+            labelMediaFinal.setText("media final: "+ mediafinalstr);
+
+            if (mediaFinal <= 4){
+                labelSituacao.setText("Situaçao: Reprovado");
+            }else if (mediaFinal >4  && mediaFinal <6){
+                labelSituacao.setText("Situaçao: Recuperação");
+            }else {
+                labelSituacao.setText("Situaçao: Aprovado");
+            }
+
+
+
+        });
 
     }
 }
